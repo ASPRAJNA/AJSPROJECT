@@ -1,0 +1,290 @@
+<!DOCTYPE html5>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href='https://fonts.googleapis.com/css?family=Arya' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Yeseva One' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Bigshot One' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="icon" href="icon.png" type="image/x-icon">
+  <link href='https://fonts.googleapis.com/css?family=Dhurjati' rel='stylesheet'>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Averia Serif Libre' rel='stylesheet'>
+  <title>TOURISM</title>
+  <style>
+    .pla {
+      list-style-type: none;
+      border: 1px solid black;
+    }
+
+    .zoom {
+      overflow: hidden;
+      
+
+    }
+
+    .zoom img {
+      overflow: hidden;
+      transition: 0.4s all ease-in-out;
+      width: 100%;
+      height: 350px;
+      
+    }
+
+    .zoom:hover img {
+      transform: scale(1.2);
+     
+    }
+
+    .zoom:hover img {
+      overflow: hidden;
+    }
+
+    nav,
+    footer {
+      font-family: 'Yeseva One';
+      font-size: 22px;
+    }
+
+    .image {
+      width: 100%;
+      height: 350px;
+
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 80px 80px 80px 80px 80px;
+      grid-template-rows: 80px 80px 80px;
+      padding: 1px;
+    }
+
+    .grid-item {
+      text-align: center;
+    }
+
+    .grid-item:hover {
+      text-align: center;
+      transform: scale(1.5, 1.5);
+      cursor: pointer;
+    }
+
+    i {
+      cursor: pointer;
+    }
+
+    .carousel-inner img {
+      width: 100%;
+      height: 600px;
+    }
+
+    li {
+      margin-left: 30px;
+    }
+
+    @media only screen and (max-width: 500px) {
+      li {
+        margin-left: 20px;
+      }
+
+      .carousel-inner img {
+        width: 100%;
+        height: 200px;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: 60px 60px 60px 60px 60px;
+        grid-template-rows: 80px 80px 80px;
+      }
+
+      #footimg {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      #footfoll {
+        margin-top: 30px;
+      }
+    }
+
+    @media only screen and (max-width: 450px) {
+      li {
+        margin-left: 20px;
+      }
+
+      .carousel-inner img {
+        width: 100%;
+        height: 200px;
+      }
+
+      #footimg {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      #footfoll {
+        margin-top: 30px;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: 40px 40px 40px 40px 40px;
+        grid-template-rows: 60px 60px 60px;
+      }
+    }
+
+    p,
+    input {
+      padding: 10px;
+      font-family: "Shrikhand";
+      margin-top: 20px;
+    }
+
+    input {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <br>
+  <h1 style="font-family: 'Averia Serif Libre';font-size: 52px;text-align: center;color: maroon;">TOURIST PLACES </h1>
+  <h1 style="font-family: 'Averia Serif Libre';text-align: center;font-size: 20px;">IN KARNATAKA</h1>
+  <br><br>
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
+    <a class="navbar-brand" href="#"><img src="nav.png" style="height:50px;width:50px"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html"><i class="fa fa-home" style="font-size:20px"></i> HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="color: white;"><i class="fa fa-map-signs" style="font-size:20px"></i>
+            PLACES</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="map.html"><i class="fa fa-map-marker" style="font-size:20px"></i> MAP</a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
+  <div class="container-fluid" ng-app="myApp" ng-controller="myCtrl">
+    <input type="search" ng-model="test" placeholder="Search The Place">
+
+    <div class="container" style="padding:10px;list-style-type: none; margin-top: 20px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);" ng-repeat="x in names|filter:  test| orderBy:myOrderBy">
+      <h1 style=" font-family: 'Bigshot One';font-size: 32px;">{{x.name}}</h1><br>
+      <i class="fa fa-star" style="font-size:28px;color:gold">{{x.rateing}}</i>
+      <div class="row">
+        <div class="col-sm-7" style=" font-family: 'Arya';font-size: 22px;">
+          {{x.details}}
+        </div>
+        <div class="col-sm-5">
+
+          <div style="padding: 10px;margin: 5px;" class="zoom">
+            <img src="{{x.imgn}}" alt="{{x.name}}">
+          </div>
+            <br><br>            <center>
+            <a href="{{x.links}}"><button type="button" class="btn btn-outline-dark"
+              style="font-size: larger;font-weight: bolder;margin-top: 20px;"><span>READ MORE </span><i
+                class="fa fa-angle-double-right" style="font-size:24px"></i> </button></a>
+                </center>
+          
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+  <br><br>
+  <footer>
+    <div class="container-fluid bg-dark text-white" style="padding: 10px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2" style="margin-top: 15px;">
+            <img src="nav.png" id="footimg" style="height: 100px;width: 150px;">
+          </div>
+          <div class="col-lg-7" style="margin-top: 15px;">
+            <h5>GALLERY</h5>
+            <div class="grid-container">
+              <div class="grid-item"><img src="images/1.jpg" style="height:100%;padding:1px;width: 100%;"></div>
+              <div class="grid-item"><img src="images/2.jpg" style="height:100%;padding:1px;width:100%"></div>
+              <div class="grid-item"><img src="images/3.jpg" style="height:100%;padding:1px;width:100%"></div>
+              <div class="grid-item"><img src="images/4.jpg" style="height:100%;padding:1px;width:100%"></div>
+              <div class="grid-item"><img src="images/5.jpg" style="height:100%;padding:1px;width:100%"></div>
+              <div class="grid-item"><img src="images/6.jpg" style="height:100%;padding:1px;width:100%"></div>
+              <div class="grid-item"><img src="images/7.jpg" style="height:100%;padding:1px;width:100%"></div>
+              <div class="grid-item"><img src="images/8.jpg" style="height:100%;padding:1px;width:100%"></div>
+              <div class="grid-item"><img src="images/9.jpg" style="height:100%;padding:1px;width:100%"></div>
+              <div class="grid-item"><img src="images/10.jpg" style="height:100%;padding:1px;width:100%"></div>
+              <div class="grid-item"><img src="images/11.jpg" style="height:100%;padding:1px;width:100%"></div>
+              <div class="grid-item"><img src="images/12.jpg" style="height:100%;padding:1px;width:100%"></div>
+              <div class="grid-item"><img src="images/13.jpg" style="height:100%;padding:1px;width:100%"></div>
+              <div class="grid-item"><img src="images/14.jpg" style="height:100%;padding:1px;width:100%"></div>
+              <div class="grid-item"><img src="images/15.jpg" style="height:100%;padding:1px;width:100%"></div>
+            </div>
+          </div>
+          <div class="col-lg-3" style="margin-top: 15px;">
+            <h5 id="footfoll">FOLLOW US</h5>
+            <i class="fa fa-facebook-square" style="font-size:24px;color: white;"></i>
+            <i class="fa fa-instagram" style="font-size:24px;color: white;"></i>
+            <i class="fa fa-twitter-square" style="font-size:24px;color: white;"></i>
+            <i class="fa fa-github" style="font-size:24px;color: white;"></i>
+            <br>
+            <br>
+            <h5>SEARCH</h5>
+            <form>
+              <input type="text" name="search" placeholder=" Search..">
+            </form>
+          </div>
+        </div>
+        <br>
+        <br>
+      </div>
+    </div>
+  </footer>
+  <script>
+    var app = angular.module("myApp", []);
+    app.controller("myCtrl", function ($scope) {
+      $scope.names = [
+        { links:"https://en.wikipedia.org/wiki/Dandeli",rateing:  4.5, imgn: "images/p1.jpg", details: "Dandeli is a city in Uttara Kannada District of Karnataka State, India. This place is situated in Western Ghat, India. The Dandeli is well known for it's teak plantation and it's dense forest. The Dandeli Wildlife Sanctuary, is also a home to animals including black panthers, monkeys and elephants, as well as many bird species. A temple stands at the entrance to the limestone Kavala Caves, known for their stalagmite formations. West of the caves, Anshi National Park encompasses the Kali Tiger Reserve.", name: "DANDELI" },
+        { links:"https://en.wikipedia.org/wiki/Lal_Bagh",rateing:  4.9, imgn: "images/p2.jpg", details: "Lalbagh Botanical Garden is located in Bangalore and is nationally and internationally renowned centre for botanical artwork, scientific study of plants and also conservation of plants. A haven for all nature lovers, Lal Bagh covers an area 240 acres in the heart of the city and has nearly 1,854 species of plants. It was commissioned by Hyder Ali in 1760 and completed by his son Tipu Sultan. The garden features rare plants of French, Persian and Afghani origin and has attained the status of a Government Botanical Garden. The Lal Bagh Rock which is over 3000 million years old is found here and is a major tourist attraction.This botanical garden, a delight for photographers, also consists of the famous glass house where an annual flower show is held every year and is also a home to an aquarium and a lake. Tipu Sultan brought in imported trees and plants from countries all over the world and planted them here and today, Lalbagh Botanical Garden has one of the world's largest collection of rare plants.", name: "LAL BAGH", },
+        { links:"https://en.wikipedia.org/wiki/Bangalore_Palace",rateing:  4.8, imgn: "images/p3.jpg", details: "An epitome of great architecture and beauty, The Majestic Bangalore Palace preserves in it the spice of old regal opulence. Currently the central attraction in Bangalore, the palace was built in the year 1878. Chamarajendra Wadiyar's British Guardians bought the original property in 1873 from the principal of Bangalore Central High School, Rev, J Garret, from his funds. The palace is extraordinarily vast and spread across 45,000 square feet. A mixture of Tudor and Scottish Gothic architecture have resulted into the grand palace that we see today.The wooden structure of the palace along with the beautiful carvings both inside and outside showcases the royal culture in different ways. Apart from being a major tourist destination, the palace is a host to different cultural events, rock shows, and marriages. As per beliefs, King Chamarajendra Wadiyar drew his inspiration for building the palace from the Windsor Castle of London. The granite seats decorated with fluorescent blue ceramic tiles on the ground floor, a fairy tale Ballroom, the famous painter Raja Ravi Varma's paintings, vine-covered walls, and the Durbar Hall on the first floor come together to form the prepossessing Bangalore Palace. ", name: "BANGALORE PALACE", },
+        { links:"https://en.wikipedia.org/wiki/Malpe",rateing:  4.5, imgn: "images/p4.jpg", details: "Malpe Beach in Karnataka is one of the unexplored beaches in India. Located at a distance of 66 kms from Mangalore and about 6 kms from Udupi, the Malpe Beach is an undefiled virgin beach. The beach has a never-ending coastline, which is surrounded by three rocky islands on the western side. Earlier, Malpe was a port on the coast of Karnataka which is now an ideal destination for a holiday away from the hustle and bustle of the city.It is also an important port and a fishing harbor in the state of Karnataka. The beach town is surrounded by four rocky islands which include:There are various places of interest at Malpe, the scenic beach is one of the biggest attractions for tourists, in addition, there is St. Mary’s Island, Ulall beach, Daria-Bahadurgad Fort, Malpe also houses the temples of Balarama and Ananteshwara.", name: "MALPE BEACH", },
+        { links:"https://en.wikipedia.org/wiki/Jamboti",rateing:  4.3, imgn: "images/p5.jpg", details: "Jamboti Hills aka Jambooti Hills is a renowned travel attraction on the outskirts of Belgaum. It is a magnificent hill range that is an extension of the Western Ghats. Jamboti Hills is a marvelous place where visitors, especially nature enthusiasts and venture aficionados visit frequently to this place and spend a good quality time. These hills are a picture-perfect destination for spending some good quality time in the laps of nature.Jamboti Hills magnetize the tourists as well as locals alike. This travel destination is a place that no one would like to miss and thus, it is visited throughout the year. But, witnessing the beauty of this hill range when it wears the thin blanket of mist is indescribable. Try visiting this destination during winters.", name: "JAMBOTI HILLS", },
+        { links:"https://en.wikipedia.org/wiki/Hampi",rateing:  4.4, imgn: "images/p6.jpg", details: "Hampi, a temple town in northern Karnataka, was once the capital of the historical Vijayanagara Dynasty. This quaint place, lying amidst striking ruins of the past, has been receiving tourists from far off for ages. The magnificence of the ruins of temples and other structures of Vijayanagar, dating back to 1500 AD, is the main attraction of this place. According to some accounts, Hampi used to be the second largest city of the world.There are innumerable boulders around Hampi that are easy to climb. One can get a stunning view of the ruins spread around Hampi by mounting one of the boulders. Located on the bank of the Tungabhadra River, Hampi has quite a number of tourist attractions like Virupaksha Temple, Vithala Temple and Nandi Statue. It is best to visit Hampi during the three day long Hampi festival held around October-November every year", name: "HAMPI", },
+        { links:"https://en.wikipedia.org/wiki/Gol_Gumbaz",rateing:  4.9, imgn: "images/p7.jpg", details: "The erstwhile capital of the Adil Shahi dynasty, Bijapur or Vijaypur remains as quaint with Gol Gumbaz gazing at the sky as the echoes of its timelessness reverberate through the air. The resting place of Mohammed Adil Shah and his wives, mistress, daughter and grandson, Gol Gumbaz is among the greatest examples of the Adil Shahi architecture with one of the biggest domes in the world.Built in 1656 it took 30 years to complete the construction of Gol Gumbaz. The mausoleum was designed by Yaqut of Dabul. Situated in the northern Karnataka, Gol Gumbaz marks the splendour of Adil Shahi rule in the Southern India. The seventh ruler of the Adil Shahi empire, Mohammed Adil Shah started the construction of the tomb right after he became the Sultan in 1626. He wanted the mausoleum to be bigger and grander compared to the memorial of his father, Ibrahim Adil Shah. Although the construction of Gol Gumbaz started during the reign of Mohammed Adil, it got disrupted due to the sudden demise of the Sultan", name: "GOL GUMBAZ", },
+        { links:"https://en.wikipedia.org/wiki/Shivganga_falls",rateing:  4.8, imgn: "images/p8.jpg", details: "At a distance of 45 km from Sirsi, 102 km from Jog Waterfalls, 130 km from Gokarna, Shivaganga is a beautiful waterfall situated in the Uttara Kannada district of Karnataka. It is one of the most famous waterfalls in the Western Ghats, and among the best places to visit during your Sirsi Trip.Shivaganga Waterfall is formed over the small Sonda River, also known as Shivaganga River. The small river falls from a height of about 74 m into a deep valley covered with dense flora and presents a charming view. One can also enjoy swimming at the falls. There is a small island near the falls locally called Ganesh pal. This name is derived from Lord Ganesh due to the presence of a small mural of Lord Ganesh inside a small temple present here.From Sirsi, one can take a cab/bus to Kodnagadde, which is about 5 km from Shivaganga falls. Motorable road is available for further 4 km which can be reached by own/private vehicles. From here one has to walk 1 km amidst the thick forest to reach the falls. The trekking path is steep and it turns out to be a bit difficult in some stretch. The Forest department has built several viewpoints that offer a beautiful view of the waterfall & valley from a distance.", name: "SHIVAGANGA FALLS", },
+        { links:"https://en.wikipedia.org/wiki/Yana,_India",rateing:  4.9, imgn: "images/p9.jpg", details: "The gigantic crystalline-like rock formations of Yana stand proud and tall among the evergreen forests of the Western Ghats in Uttara Kannada District. Yana is an ideal destination for pilgrims, trekkers, and nature-lovers alike. A 16km trek through the cool and breezy hills brings you to the foot of the mountain where the rock formations begin. At the top, a stunning sight awaits you: the awesome Bhairaveshwara and Jaganmohini shikharas (or peaks). A cave temple dedicated to Lord Shiva lies below these shikharas. The vagaries of time have caused these limestone structures to turn blackish brown and lots of beehives dot the rock surface.A popular legend associated with Yana holds that Bhasmasura, an evil demon, performed penance to Lord Shiva and obtained the power of reducing to ashes anybody on whose head he placed his hand. An ungrateful Bhasmasura, however, soon decided to test the boon on his benefactor. To escape from him, Lord Shiva came to earth and hid in Yana. Lord Vishnu taking the form of a beautiful woman Mohini, challenged the demon to dance and made him touch his own head and thereby reducing him to ashes.Yana rocks are an adventure seeker’s ultimate destination. Yana in Uttara Kannada district attracts trekkers and climbers from all over the world.", name: "YANA", },
+        { links:"https://en.wikipedia.org/wiki/Vidhana_Soudha",rateing:  4.5, imgn: "g1.jpg", details: "Vidhana Soudha counts amongst the most impressive as well as the most magnificent buildings in the Bangalore city of India. It is mainly famous for housing the Legislative Chambers of the state government. The three hundred rooms of Vidhan Soudha accommodate approximately twenty-two departments of the state government. The building rises to a height of almost 46 m, making it one of the most imposing structures in the city of Bangalore.Built in the year 1956, Vidhana Soudha of Bangalore boasts of exquisite Dravidian architecture. It was built under the then chief minister of Karnataka, Mr. Kengal Hanumanthaiah, as a tribute to Indian temple architecture. The chief engineer of Vidhan Soudha, B.R. Manickam mainly made use of granite to get the edifice constructed. In the following lines, we have provided more information on the architecture of the Vidhan Soudha of Bangalore, India.", name: "VIDHAN SOUDHA", },
+        { links:"https://en.wikipedia.org/wiki/Brindavan_Gardens",rateing:  4.6, imgn: "images/p11.jpg", details: "The Beautiful Brindavan Garden,The heritage corridor of Mysore and the old city of Srirangapatna is full of many attractions that give visitors a glimpse of Karnataka’s rich legacy of art and culture. Take a break from the prosaic routine of the city life with a trip to the royal cities of Karnataka. Spread across 60 acres, the beautifully landscaped Brindavan Gardens were completed in 1932 and are one of the places to visit in Mysore. Brindavan Gardens, Mysore.The three-terraced gardens feature many attractions. Water fountains adorn the finely manicured grounds of this sprawling area and some of the main flora found across the Gardens includes beautiful Ficus trees and flowering plants like celosia, marigolds and bougainvilleas. The larger area around the Brindavan Gardens is a haven for plant lovers and professional horticulturists. One can find the latest growing techniques being demonstrated and different breeds of a wide variety of fruits, flowers and other plants in these large plantations.", name: "BRINDAVANA GARDEN", },
+        { links:"https://en.wikipedia.org/wiki/Baba_Budan_giri",rateing:  4.7, imgn: "images/p12.jpg", details: "In and around Chikmagalur there are a number of hill stations and waterfalls which are very popular among the tourists. The Baba Budan Giri Hill Range or Chandra Drona Parvathais home to the highest peak of Karnataka known as Mullayanagiri. It is 1930 meters tall and is famous for the view of beautiful sunsets you can see from there. The way to the peak is very narrow, thusyou can only drive halfway. The rest of the journey to the peak has to be made on foot. From the top of the hill, on a clear day, you can evensee the Arabian Sea.", name: "BABA BUDANGIRI", },
+        { links:"https://en.wikipedia.org/wiki/Bannerghatta_National_Park",rateing:  4.6, imgn: "images/p13.jpg", details: "Located on the outskirts of Bangalore, and usually known as BBBP, the Bengaluru Bannerghatta Biological Park is amongst the most popular and frequently visited destinations in the city. Catering to nature and wildlife enthusiasts, it is an integral part of the magnificent Bannerghatta National Park and is spread across a massive area. It was declared a biological reserve in 2002 and is also one of the only places in the world where one can experience wilderness in such a close proximity to the city. In addition to a zoo and jungle safari, the Bannerghatta Biological Park also has a butterfly park and a rescue centre where the animals who were in captivity are conserved and protected.The Bannerghatta Biological Park is also the first biological park in all of India, which has a fenced forested elephant sanctuary. Covering an expanse of 122 acres, this sanctuary is sponsored by PETA India. ", name: "BANNERGHTTA", },
+        { links:"https://en.wikipedia.org/wiki/Magod_Falls",rateing:  4.7, imgn: "images/p14.jpg", details: "Magod Falls is a group of waterfalls in Karnataka, India, where the river Bedti falls from a height of nearly 200 metres (660 ft) in two steps. The falls are located about 17 kilometres (11 mi) from the town of Yellapur, in the district of Uttara Kannada, and are easily accessible from several lakes and towns.", name: "MAGOD FALLS", },
+        { links:"https://en.wikipedia.org/wiki/Gokarna,_Karnataka",rateing:  4.6, imgn: "images/p15.jpg", details: "Gokarna is a town on the Arabian Sea, in the southwestern Indian state of Karnataka. A popular pilgrimage destination for Hindus, it’s known for sacred sites like Mahabaleshwar Temple, which has a shrine dedicated to the deity Shiva. Nearby, Koti Teertha is a temple tank where devotees wash in the holy waters. The town is also home to beaches such as palm-lined Gokarna, in the center, plus Kudle and Om farther south.", name: "GOKARNA", },
+        { links:"https://en.wikipedia.org/wiki/Jog_Falls",rateing:  5, imgn: "images/p16.jpg", details: "Jog Falls, a major attraction in Karnataka, is located in the Shimoga district of Karnataka. Also known by alternative names of Gerusoppe Falls, Gersoppa Falls, and Jogada Gundi, it is one of the highest waterfalls in India. During monsoons, one can see a breathtaking view of the falls with rainbows coming every now and then.It is one of nature’s splendid masterpieces and is situated in the dense evergreen forests. The effect of these striking falls is enhanced by the wild and beautiful region around it which is covered with plenty of abundant vegetation. This waterfall drops directly down without streaming on the rocks.", name: "JOG FALLS", },
+        { links:"https://en.wikipedia.org/wiki/Talakadu",rateing:  4.0, imgn: "images/p17.jpg", details: "Nestled on the banks of the River Kaveri, Talakadu in Karnataka is a mystical place steeped with a rich past and cultural heritage. It is famous for the Vaidyanatheshwara Temple dedicated to Lord Shiva. The town has been a witness to the rise and falls of several great kingdoms including Cholas, Pallavas, Gangas, Vijayanagar and Hoysalas.The place derives its name from two local chieftains Tala and Kada and this called Talakadu. Famous among devotees of Lord Shiva, visitors can witness the legacy of the town that still reflects in its age-old antiquity. There are a number of temples that are buried under the sand and are excavated once in every 12 years for special worship called 'Panchalinga Darshana'.", name: "TALAKADU", },
+        { links:"https://en.wikipedia.org/wiki/Aihole",rateing:  4.1, imgn: "images/p18.jpg", details: "Aihole was once the capital of the Chalukya Dynasty, and is a city with a rich and illustrious history. It has great cultural significance as the cradle of Hindu temple architecture, and has more than 125 temples in and around it. Aihole is an archaeologists’ delight with several temples dating back to Chalukyan times. Excavation and investigation into the history of Aihole continues and several thousand tourists seek out the serene and spiritual ambiance of this city every year.The Aihole Inscription, believed to have been composed by the Jain poet Ravikeerthi, is a great source for reconstructing the history of this period. It records the achievements of Pulakesi II, especially his victory against Harshavardhana, the ruler of Northern India.", name: "AIHOLE", },
+        { links:"https://en.wikipedia.org/wiki/Ranganathaswamy_Temple,_Srirangapatna",rateing:  4.2, imgn: "images/p19.jpg", details: "The Sri Ranganatha Temple is in a small island on the river Kaveri, in Mandya District. This temple is dedicated to Lord Vishnu and has an idol of the Lord in his reclining form, called Ranganatha. It is one of the three Ranga Kshetrams, all located in small islands along the River Kaveri. This is the Adi Rangam or First Ranga, the Madhya Rangam is in Shivanasamudra also in Karnataka, The third, Antya Rangam or last temple in the trinity is in Srirangam, in Trichirapalli, Tamil Nadu.\nSri Ranganatha Temple – History The Sri Ranganatha Temple was built by a Ganga Chieftain, Thirmalaiyya, and a devotee of Lord Vishnu. It was later added to by later rulers like Hoysala and Vijayanagara Kings. This temple was also highly revered by Haider Ali and Tipu Sultan.", name: "SRIRANGAPATNA", },
+        { links:"https://en.wikipedia.org/wiki/Halebidu",rateing:  4.5, imgn: "images/p20.jpg", details: "Halebiduis located in Hassan district in Karnataka. Ketumalla, the chief of staff of Hoysala Kingdom, built this temple during 1121 A.D and attributed to his king, Vishnuvardhana and queen, Shantala Devi. Even then it is learnt that it took 105 years to complete. If one stands on the platform of the temple and sees around he will see the hills opposite and two big bulls facing the temple and Ganeshafigure on the south.It is believed that Queen Shantala Devi, was an epitome of beauty and fashion, she was also a great Bharatnatyam dancer and musician. Sculptors were inspired by this and the Shilabalikas, the dancing figures, are models of Queen Shantala Devi and her courtisans. History of Hoysalas mentions Shantala Devi had great influence in the adminstration and religious reforms during Vishnuvardhana reign. She was follower of Jainism and the King follower of Sri Vaishnaism and was influenced by Saint Ramanuja Charya.", name: "HALEBIDU", },
+        { links:"https://en.wikipedia.org/wiki/Mysore_Zoo",rateing:  4.4, imgn: "images/p21.jpg", details: "Mysuru Zoo (Sri Chamarajendra Zoological Garden) was started in 1892 by Chamaraja Wodeyar X, then the King of Mysuru. Initially as a private Zoo and was named as Khas-Bangale. It was also called as Thamasha Bangale. The zoo which has now spread over an area of 250 acres was initially meant for the exclusive visit of the royal family but public entry started as early as 1920.", name: "MAYSORE ZOO", },
+        { links:"https://en.wikipedia.org/wiki/Badami",rateing:  4.5, imgn: "images/p22.jpg", details: "Founded by the Chalukyas, Badami in Karnataka is one destination in India that can steal one’s heart in fractions of second. The heart melting landscape accompanied by beautifully done temples and fort can easily draw the attention of the travellers from around the globe. You may compare this town to other ancient destinations in the country but let us assure you there is only one such place that completely nails the Karnataka tour and Badami is what it is called.The architecture style of Badami is such that was successful in inspiring the architecture of Vijaynagara Empire. The Rock Cut Caves found here is probably one of the most scenic structures in India. The inner halls of the caves have prolific sculptural symbolism; there is a fine balance of versatility and restrain in the caves. On the other hand stands the Bhutnatha Temple, which has the mix of Dravidian and Jain style architecture, intricate carvings and stone sculptures make the temples here look spectacular", name: "BADAMI", },
+        { links:"https://en.wikipedia.org/wiki/Mysore_Palace",rateing:  4.8, imgn: "images/p23.jpg", details: "The Mysore Palace is one of the grandest and most incredible buildings in India without a doubt. Unlike other of the most famous landmarks in India, the Mysore Palace is not centuries old but rather built in the 20th century on the site of previously constructed palaces. It is in fact the fourth building built in the same location.The Mysore Palace, also known as the Amba Vilas Palace, is one of seven palaces in the royal city of Mysore. The building used to be the residence of the Wodeyar Dynasty and the seat of the Kingdom of Mysore who ruled over the city from 1399 until India’s independence in 1947 through a succession of 25 rulers.", name: "MYSORE PALACE ", },
+      ];
+    });
+  </script>
+</body>
+
+</html>
